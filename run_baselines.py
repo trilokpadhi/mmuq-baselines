@@ -12,7 +12,6 @@ from math import log2
 import os
 import pickle
 import json
-
 from rouge_score import rouge_scorer
 import itertools
 import math
@@ -28,12 +27,8 @@ deberta_model_name = 'microsoft/deberta-base-mnli'
 deberta_tokenizer = AutoTokenizer.from_pretrained(deberta_model_name)
 deberta_model = AutoModelForSequenceClassification.from_pretrained(deberta_model_name)
 
-# Load responses
-# explanation_dir = '/home/ubuntu/Multimodal-Uncertainty-Quantification/runs/llava_gqa_yes_gsam_grounding_random_100/explanations'
+# Load responses, explanation_dir contains the responses from the model
 explanation_dir = '/mnt/myebsvolume/home/ubuntu/Multimodal-Uncertainty-Quantification/runs/llava_gqa_yes_gsam_grounding_random_10000/explanations'
-# grounding_dir = '/home/ubuntu/Multimodal-Uncertainty-Quantification/runs/llava_gqa_yes_gsam_grounding_random_100/grounding'
-grounding_dir = '/mnt/myebsvolume/home/ubuntu/Multimodal-Uncertainty-Quantification/runs/llava_gqa_yes_gsam_grounding_random_10000/grounding'
-# uncertainty_dir = '/home/ubuntu/Multimodal-Uncertainty-Quantification/runs/llava_gqa_yes_gsam_grounding_random_100/uncertainty'
 uncertainty_dir = '/home/ec2-user/Multimodal-Uncertainty-Quantification/runs/uncertainty'
 
 # Method A: Log Probability of the sentence from the scores of the model
@@ -202,9 +197,6 @@ files = os.listdir(explanation_dir)
 for file in tqdm(files, desc='Processing files', total=len(files)):
     # Get probability of the 20 responses
     uncertainty_scores_baseline = {}
-    # predictive_entropy = {}
-    # lexical_similarity = {}
-    # semantic_entropy = {}
     with open(os.path.join(explanation_dir, file), 'rb') as f:
         question_id = file.split('_')[1].split('.')[0] # since file name is of the format - explanations_181060668.pkl
         explanation_metadata = pickle.load(f)
@@ -216,6 +208,10 @@ for file in tqdm(files, desc='Processing files', total=len(files)):
         for key, value in explanation_metadata.items():
             if 'response' in key:
                 metadata = explanation_metadata[key]
+                """
+                Method A: Log Probability of the sentence from the scores of the model
+                Method B: Use transition scores to calculate the log probability of the sentence
+                """
                 # logits = metadata['outputs'].scores
                 # logits = metadata['transition_scores']
                 # generated_token_ids = metadata['generated_token_ids']
@@ -225,14 +221,10 @@ for file in tqdm(files, desc='Processing files', total=len(files)):
                 
                 ## get explanations from the model response dict to calculate rogue scores
                 try:
-                    response_json = get_json_from_response(metadata['decoded_outputs'])
-                    explanation = response_json['explanation']
+                    explanation = metadata['explanation'] # get the explanation from the response, of which you have to evaluate
                     explanations.append(explanation)
                     
                     # for semantic entropy
-                    # explanation_with_log_probs[key] = {}
-                    # explanation_with_log_probs[key]['explanation'] = explanation
-                    # explanation_with_log_probs[key]['log_prob'] = log_prob_sentence
                     explanation_with_log_probs[explanation] = log_prob_sentence
                     
                 except Exception as e:
