@@ -1,5 +1,4 @@
 # MMUQ Baselines
-- `README.md` file with the description of the repository
 - `run_baseline.py` file with the code for the baseline models, The baseline models are:
     - Entropy
     - Semantic Entropy
