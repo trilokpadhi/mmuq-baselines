@@ -138,9 +138,9 @@ def get_semantic_entropy(question, explanation_with_log_probs):
     # Convert log probabilities to probabilities
     probs = [math.exp(lp) for lp in log_probs]
 
-    # Normalize probabilities to ensure they sum to 1
-    total_prob = sum(probs)
-    probs = [p / total_prob for p in probs]
+    # # Normalize probabilities to ensure they sum to 1
+    # total_prob = sum(probs)
+    # probs = [p / total_prob for p in probs]
 
     # Initialize clusters
     clusters = []
