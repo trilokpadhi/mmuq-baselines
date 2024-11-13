@@ -1,6 +1,6 @@
 import os
 import torch
-from transformers import AutoProcessor, LlavaForConditionalGeneration
+from transformers import AutoProcessor, LlavaForConditionalGeneration, StoppingCriteriaList
 from PIL import Image
 import pickle
 from torch.utils.data import DataLoader, Dataset, Subset
@@ -40,6 +40,19 @@ def collate_fn(batch):
         'image_paths': image_paths
     }
 
+# Define custom stopping criteria
+class CustomStoppingCriteria:
+    def __init__(self, tokenizer, eos_sequences):
+        self.tokenizer = tokenizer
+        self.eos_sequences = eos_sequences
+
+    def __call__(self, input_ids, scores):
+        decoded_text = self.tokenizer.decode(input_ids[0], skip_special_tokens=True)
+        for seq in self.eos_sequences:
+            if seq in decoded_text:
+                return True
+        return False
+    
 # Generate explanations using LLaVA model
 def generate_explanations_LLaVA(models, sample, config, config_logging):
     torch_device = models['llava']['device']
@@ -54,10 +67,12 @@ def generate_explanations_LLaVA(models, sample, config, config_logging):
     inputs = processor_llava(images=raw_image, text=prompt, return_tensors="pt").to(torch_device)
     explanation_path = os.path.join(config_logging['explanation_dir'], f"explanations_{question_id}.pkl")
 
+    custom_eos_sequences = ['\n', '.']
+    stopping_criteria = StoppingCriteriaList([CustomStoppingCriteria(processor_llava.tokenizer, custom_eos_sequences)])
     if not os.path.exists(explanation_path):
         with torch.no_grad():
             outputs = model_llava.generate(
-                input_ids=inputs['input_ids'], pixel_values=inputs['pixel_values'], max_new_tokens=50
+                input_ids=inputs['input_ids'], pixel_values=inputs['pixel_values'], max_new_tokens=50, stopping_criteria=stopping_criteria
             )
             generated_token_ids = outputs.sequences[:, inputs['input_ids'].shape[-1]:] 
             decoded_output = processor_llava.decode(generated_token_ids[0], skip_special_tokens=True)
