@@ -7,3 +7,7 @@
 
 - `token-probs.py` file with the code for the token probabilities of the response from `model.generate()`
 - `llava-inference.ipynb` file with the code for the inference of the LLaVA 1.5 model
+
+# Datasets
+- Download the GQA dataset from [here](https://cs.stanford.edu/people/dorarad/gqa/download.html)
+
