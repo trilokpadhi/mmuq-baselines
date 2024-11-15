@@ -11,3 +11,7 @@
 # Datasets
 - Download the GQA dataset from [here](https://cs.stanford.edu/people/dorarad/gqa/download.html)
 
+# Steps to Run 
+- After downloading the datasets, please set the path for the dataset in [main_llava_gqa.py](https://github.com/trilokpadhi/mmuq-baselines/blob/main/main_llava_gqa.py)
+- This will log all the generations and the artifacts in the `runs/` directory, with explanations.
+- After this please update the paths of these explanations in [run_baselines.py](https://github.com/trilokpadhi/mmuq-baselines/blob/main/run_baselines.py)
