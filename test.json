@@ -1,0 +1,575 @@
+{
+    "15490166": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "oven (1007412)"
+            },
+            {
+                "operation": "verify",
+                "dependencies": [
+                    0
+                ],
+                "argument": "full"
+            }
+        ],
+        "entailed": [
+            "15490160",
+            "15490161",
+            "15490162",
+            "15490163",
+            "15490164",
+            "15490165",
+            "15490167",
+            "15490168",
+            "15490173",
+            "15490172",
+            "15490133",
+            "15490134"
+        ],
+        "equivalent": [
+            "15490166"
+        ],
+        "question": "Does the oven look full?",
+        "imageId": "2318761",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "06-oven_full"
+        },
+        "answer": "no",
+        "semanticStr": "select: oven (1007412)->verify: full [0]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2": "1007412"
+            },
+            "fullAnswer": {
+                "2": "1007412"
+            }
+        },
+        "types": {
+            "detailed": "verifyAttrC",
+            "semantic": "attr",
+            "structural": "verify"
+        },
+        "fullAnswer": "No, the oven is empty."
+    },
+    "041017735": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "frame (2880186)"
+            },
+            {
+                "operation": "relate",
+                "dependencies": [
+                    0
+                ],
+                "argument": "people,below,s (2880187)"
+            },
+            {
+                "operation": "choose rel",
+                "dependencies": [
+                    1
+                ],
+                "argument": "bottle,to the left of|to the right of,s (2923642)"
+            }
+        ],
+        "entailed": [
+            "041017734"
+        ],
+        "equivalent": [
+            "041017735"
+        ],
+        "question": "Is the bottle to the left or to the right of the people below the frame?",
+        "imageId": "2322084",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "13-people_bottle"
+        },
+        "answer": "left",
+        "semanticStr": "select: frame (2880186)->relate: people,below,s (2880187) [0]->choose rel: bottle,to the left of|to the right of,s (2923642) [1]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2": "2923642",
+                "12": "2880187",
+                "15": "2880186"
+            },
+            "fullAnswer": {
+                "1": "2923642",
+                "8": "2880187"
+            }
+        },
+        "types": {
+            "detailed": "relChooser",
+            "semantic": "rel",
+            "structural": "choose"
+        },
+        "fullAnswer": "The bottle is to the left of the people."
+    },
+    "01369347": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "knife (1315219)"
+            },
+            {
+                "operation": "filter length",
+                "dependencies": [
+                    0
+                ],
+                "argument": "short"
+            },
+            {
+                "operation": "verify material",
+                "dependencies": [
+                    1
+                ],
+                "argument": "metal"
+            },
+            {
+                "operation": "verify color",
+                "dependencies": [
+                    1
+                ],
+                "argument": "white "
+            },
+            {
+                "operation": "and",
+                "dependencies": [
+                    2,
+                    3
+                ],
+                "argument": ""
+            }
+        ],
+        "entailed": [
+            "01369348"
+        ],
+        "equivalent": [
+            "01369347"
+        ],
+        "question": "Does the short knife look white and metallic?",
+        "imageId": "2383937",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "05-metal_white"
+        },
+        "answer": "no",
+        "semanticStr": "select: knife (1315219)->filter length: short [0]->verify material: metal [1]->verify color: white  [1]->and:  [2, 3]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2:4": "1315219"
+            },
+            "fullAnswer": {
+                "2": "1315219"
+            }
+        },
+        "types": {
+            "detailed": "verifyAttrsC",
+            "semantic": "attr",
+            "structural": "logical"
+        },
+        "fullAnswer": "No, the knife is metallic but black."
+    },
+    "00463872": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "bananas (4687098)"
+            },
+            {
+                "operation": "filter hposition",
+                "dependencies": [
+                    0
+                ],
+                "argument": "left"
+            },
+            {
+                "operation": "relate",
+                "dependencies": [
+                    1
+                ],
+                "argument": "bowl,to the left of,s (4687061)"
+            },
+            {
+                "operation": "exist",
+                "dependencies": [
+                    2
+                ],
+                "argument": "?"
+            }
+        ],
+        "entailed": [
+            "00463871",
+            "00463873"
+        ],
+        "equivalent": [
+            "00463871",
+            "00463872"
+        ],
+        "question": "Do you see any bowls to the left of the bananas on the left side of the image?",
+        "imageId": "2340262",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "13-bananas_bowl"
+        },
+        "answer": "no",
+        "semanticStr": "select: bananas (4687098)->filter hposition: left [0]->relate: bowl,to the left of,s (4687061) [1]->exist: ? [2]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "10": "4687098",
+                "4": "4687061"
+            },
+            "fullAnswer": {
+                "9": "4687098",
+                "2": "4687061"
+            }
+        },
+        "types": {
+            "detailed": "existRelSRC",
+            "semantic": "rel",
+            "structural": "verify"
+        },
+        "fullAnswer": "No, the bowl is to the right of the bananas."
+    },
+    "071008068": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "car (995663)"
+            },
+            {
+                "operation": "relate",
+                "dependencies": [
+                    0
+                ],
+                "argument": "animal,to the left of,s (995662)"
+            },
+            {
+                "operation": "query",
+                "dependencies": [
+                    1
+                ],
+                "argument": "pose"
+            }
+        ],
+        "entailed": [
+            "071008072",
+            "071008071",
+            "071008070",
+            "071008064",
+            "071008065",
+            "071008066",
+            "071008067",
+            "071008069",
+            "071008079",
+            "071008078",
+            "071008082",
+            "071008083",
+            "071008080",
+            "071008081"
+        ],
+        "equivalent": [
+            "071008068"
+        ],
+        "question": "What is the animal to the left of the car doing?",
+        "imageId": "2320156",
+        "isBalanced": false,
+        "groups": {
+            "global": "pose",
+            "local": "10q-sheep_pose"
+        },
+        "answer": "lying",
+        "semanticStr": "select: car (995663)->relate: animal,to the left of,s (995662) [0]->query: pose [1]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "9": "995663",
+                "3": "995662"
+            },
+            "fullAnswer": {
+                "1": "995662"
+            }
+        },
+        "types": {
+            "detailed": "activity",
+            "semantic": "attr",
+            "structural": "query"
+        },
+        "fullAnswer": "The sheep is lying."
+    },
+    "02346093": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "phone (2384166)"
+            },
+            {
+                "operation": "verify rel",
+                "dependencies": [
+                    0
+                ],
+                "argument": "chair,to the left of,o (-)"
+            }
+        ],
+        "entailed": [],
+        "equivalent": [
+            "02346093"
+        ],
+        "question": "Is the telephone to the left of a chair?",
+        "imageId": "2370560",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "13-phone_chair"
+        },
+        "answer": "no",
+        "semanticStr": "select: phone (2384166)->verify rel: chair,to the left of,o (-) [0]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2": "2384166"
+            },
+            "fullAnswer": {
+                "9": "2103187",
+                "2": "2384166"
+            }
+        },
+        "types": {
+            "detailed": "relVerifyCo",
+            "semantic": "rel",
+            "structural": "verify"
+        },
+        "fullAnswer": "No, the telephone is to the left of the fork."
+    },
+    "06738419": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "door (462657)"
+            },
+            {
+                "operation": "verify color",
+                "dependencies": [
+                    0
+                ],
+                "argument": "gray"
+            }
+        ],
+        "entailed": [
+            "06738422",
+            "06738423",
+            "06738421",
+            "06738430",
+            "06738429",
+            "06738417",
+            "06738420"
+        ],
+        "equivalent": [
+            "06738419",
+            "06738420"
+        ],
+        "question": "Does the door look gray?",
+        "imageId": "2394606",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "06-door_gray"
+        },
+        "answer": "yes",
+        "semanticStr": "select: door (462657)->verify color: gray [0]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2": "462657"
+            },
+            "fullAnswer": {
+                "2": "462657"
+            }
+        },
+        "types": {
+            "detailed": "verifyAttrK",
+            "semantic": "attr",
+            "structural": "verify"
+        },
+        "fullAnswer": "Yes, the door is gray."
+    },
+    "08998106": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "lamp (2478878)"
+            },
+            {
+                "operation": "filter hposition",
+                "dependencies": [
+                    0
+                ],
+                "argument": "right"
+            },
+            {
+                "operation": "choose rel",
+                "dependencies": [
+                    1
+                ],
+                "argument": "bed,to the left of|to the right of,s (3409034)"
+            }
+        ],
+        "entailed": [
+            "08998105",
+            "08997971",
+            "08997970",
+            "08997972"
+        ],
+        "equivalent": [
+            "08998106"
+        ],
+        "question": "Is the bed to the right or to the left of the lamp that is on the right?",
+        "imageId": "2336271",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "13-lamp_bed"
+        },
+        "answer": "left",
+        "semanticStr": "select: lamp (2478878)->filter hposition: right [0]->choose rel: bed,to the left of|to the right of,s (3409034) [1]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2": "3409034",
+                "12": "2478878"
+            },
+            "fullAnswer": {
+                "1": "3409034",
+                "8": "2478878"
+            }
+        },
+        "types": {
+            "detailed": "relChooser",
+            "semantic": "rel",
+            "structural": "choose"
+        },
+        "fullAnswer": "The bed is to the left of the lamp."
+    },
+    "02313605": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "shoes (4038166)"
+            },
+            {
+                "operation": "verify color",
+                "dependencies": [
+                    0
+                ],
+                "argument": "brown"
+            }
+        ],
+        "entailed": [
+            "02313604",
+            "02313607"
+        ],
+        "equivalent": [
+            "02313605",
+            "02313604"
+        ],
+        "question": "Do the shoes have brown color?",
+        "imageId": "713552",
+        "isBalanced": false,
+        "groups": {
+            "global": null,
+            "local": "06-shoes_brown"
+        },
+        "answer": "no",
+        "semanticStr": "select: shoes (4038166)->verify color: brown [0]",
+        "annotations": {
+            "answer": {},
+            "question": {
+                "2": "4038166"
+            },
+            "fullAnswer": {
+                "2": "4038166"
+            }
+        },
+        "types": {
+            "detailed": "verifyAttrC",
+            "semantic": "attr",
+            "structural": "verify"
+        },
+        "fullAnswer": "No, the shoes are white."
+    },
+    "11601336": {
+        "semantic": [
+            {
+                "operation": "select",
+                "dependencies": [],
+                "argument": "zucchini (2263645)"
+            },
+            {
+                "operation": "relate",
+                "dependencies": [
+                    0
+                ],
+                "argument": "vegetable,to the right of,s (2043537)"
+            },
+            {
+                "operation": "query",
+                "dependencies": [
+                    1
+                ],
+                "argument": "name"
+            }
+        ],
+        "entailed": [
+            "11601335",
+            "11601334"
+        ],
+        "equivalent": [
+            "11601336"
+        ],
+        "question": "What kind of vegetable is to the right of the zucchini?",
+        "imageId": "2356914",
+        "isBalanced": false,
+        "groups": {
+            "global": "vegetable",
+            "local": "15-zucchini_to the right of,s"
+        },
+        "answer": "spinach",
+        "semanticStr": "select: zucchini (2263645)->relate: vegetable,to the right of,s (2043537) [0]->query: name [1]",
+        "annotations": {
+            "answer": {
+                "0": "2043537"
+            },
+            "question": {
+                "3": "2043537"
+            },
+            "fullAnswer": {
+                "1": "2043537",
+                "3": "2043537"
+            }
+        },
+        "types": {
+            "detailed": "categoryRelS",
+            "semantic": "rel",
+            "structural": "query"
+        },
+        "fullAnswer": "The vegetable is spinach."
+    }
+}
