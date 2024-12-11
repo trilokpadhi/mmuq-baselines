@@ -20,7 +20,7 @@
 
 2. Set the dataset paths in [main_llava_gqa.py](https://github.com/trilokpadhi/mmuq-baselines/blob/main/main_llava_gqa.py):
     - `root_dir`: Path to the root directory of the dataset
-    - `questions_file`: Path to the questions file
+    - `questions_file`: Path to the questions file relative to the root directory
     - `image_dir`: Path to the images directory relative to the root directory
 
 3. The generations and artifacts will be logged in the `runs/` directory with explanations.
