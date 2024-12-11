@@ -28,8 +28,8 @@ deberta_tokenizer = AutoTokenizer.from_pretrained(deberta_model_name)
 deberta_model = AutoModelForSequenceClassification.from_pretrained(deberta_model_name)
 
 # Load responses, explanation_dir contains the responses from the model
-explanation_dir = '/mnt/myebsvolume/home/ubuntu/Multimodal-Uncertainty-Quantification/runs/llava_gqa_yes_gsam_grounding_random_10000/explanations'
-uncertainty_dir = '/home/ec2-user/Multimodal-Uncertainty-Quantification/runs/uncertainty'
+explanation_dir = '/home/ubuntu/trilok/mmuq-baselines/explanations'
+uncertainty_dir = '/home/ubuntu/trilok/mmuq-baselines/uncertainty'
 
 # Method A: Log Probability of the sentence from the scores of the model
 def get_log_prob_from_logits(logits, generated_token_ids):
@@ -85,17 +85,19 @@ def get_lexical_similarity(responses):
     average_rouge_l = sum(rouge_l_scores) / len(rouge_l_scores)        
     return average_rouge_l
     
-def get_accuracy(full_answers, questions, responses):
+def get_accuracy(full_answer, question, responses):
     """
-    full_answers: list of full answers
-    questions: list of questions
+    full_answer: full answer
+    question: question
     responses: list of responses
     and calculate the accuracy by entailment of the responses with the full answers
     """
     correct = 0
     for response in responses:
-        premise = f"{questions} {full_answers}"
-        hypthesis = f"{questions} {response}"
+        # premise = f"{question} {full_answer}"
+        # hypthesis = f"{question} {response}"
+        premise = f'{question} {response}'
+        hypthesis = f'{question} {full_answer}' # Here we have to check if the ground truth is contained in the response
         
         inputs = deberta_tokenizer.encode_plus(premise, hypthesis, return_tensors='pt', truncation=True)
         with torch.no_grad():
@@ -194,7 +196,7 @@ def get_semantic_entropy(question, explanation_with_log_probs):
 # Get the responses from the files and store them in a dictionary
 responses = {}
 files = os.listdir(explanation_dir)
-for file in tqdm(files, desc='Processing files', total=len(files)):
+for file in tqdm(files, desc='Processing files', total=len(files)): 
     # Get probability of the 20 responses
     uncertainty_scores_baseline = {}
     with open(os.path.join(explanation_dir, file), 'rb') as f:
@@ -205,6 +207,7 @@ for file in tqdm(files, desc='Processing files', total=len(files)):
         explanations = []
         explanation_with_log_probs = {}
         question = explanation_metadata['questions'][0]
+        # question = explanation_metadata['promptified_questions'][0]
         for key, value in explanation_metadata.items():
             if 'response' in key:
                 metadata = explanation_metadata[key]
@@ -221,7 +224,7 @@ for file in tqdm(files, desc='Processing files', total=len(files)):
                 
                 ## get explanations from the model response dict to calculate rogue scores
                 try:
-                    explanation = metadata['explanation'] # get the explanation from the response, of which you have to evaluate
+                    explanation = metadata['decoded_output'] # get the explanation from the response, of which you have to evaluate
                     explanations.append(explanation)
                     
                     # for semantic entropy
@@ -246,7 +249,7 @@ for file in tqdm(files, desc='Processing files', total=len(files)):
         uncertainty_scores_baseline['num_clusters'] = num_clusters
         uncertainty_scores_baseline['accuracy'] = accuracy
         
-    responses[question_id] = uncertainty_scores_baseline
+    responses[question_id] = uncertainty_scores_baseline # store the uncertainty scores for each question in the responses dictionary
     
 
 # make the directory if it does not exist
